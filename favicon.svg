@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="16" fill="#0B0B09"/>
+  <!-- Mountain Peaks -->
+  <path d="M14 44 L30 18 L46 44 Z" fill="none" stroke="#D4AF37" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M28 44 L38 28 L50 44 Z" fill="none" stroke="#E8DCC8" stroke-width="2.5" stroke-linejoin="round" opacity="0.8"/>
+  <path d="M30 18 L34 25 L26 28 Z" fill="#D4AF37" opacity="0.6"/>
+  <!-- Sand Dune Curve -->
+  <path d="M10 46 C 22 38, 42 50, 54 42" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+</svg>
