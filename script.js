@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
-  // Navigation & Mobile Menu
+  // Navigation & Mobile Menu Elements
   const nav = $('#siteNav');
   const menuToggle = $('.menu-toggle');
   const mobileMenu = $('#mobileMenu');
@@ -18,7 +18,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (menuToggle) menuToggle.addEventListener('click', () => toggleMenu(true));
   if (menuCloseBtn) menuCloseBtn.addEventListener('click', () => toggleMenu(false));
-  $$('.mobile-link').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+  // Smooth Scroll Helper
+  function scrollToSection(targetId) {
+    const targetEl = document.querySelector(targetId);
+    if (!targetEl) return;
+
+    const headerOffset = 80;
+    const elementPosition = targetEl.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+
+  // Handle Mobile Menu Link Clicks
+  $$('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        toggleMenu(false);
+
+        // Small delay to allow mobile drawer to slide away smoothly
+        setTimeout(() => {
+          scrollToSection(href);
+        }, 200);
+      }
+    });
+  });
+
+  // Handle Desktop & Footer Anchor Links Smooth Scroll
+  $$('.desktop-nav a, .footer-links a, .announcement-link, .nav-actions a').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        scrollToSection(href);
+      }
+    });
+  });
 
   // Scroll Header & Back-to-Top
   window.addEventListener('scroll', () => {
